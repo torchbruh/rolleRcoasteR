@@ -1,0 +1,15 @@
+streamlit>=1.32
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pandas>=2.0
+
+# Optional: Only needed if you want the LLM to generate fresh radical waveform ideas.
+# The app works great without it using high-quality built-in concepts.
+# ollama>=0.3
+
+# torch is optional but strongly recommended for the deep "gradient coaster" synthesizer
+# torch>=2.0
+
+# For even richer interactive plots later (uncomment if you want):
+# plotly>=5.18
