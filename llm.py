@@ -9,7 +9,6 @@ When not, it falls back to a high-quality curated bank of radical concepts.
 """
 
 from __future__ import annotations
-import ollama
 from typing import List, Dict, Optional
 import random
 
@@ -119,6 +118,7 @@ def dream_waveforms(mission: str, model: str = "llama3.2", timeout: int = 45) ->
     Returns list of dicts with keys: name, core, why, build, dark
     """
     try:
+        import ollama  # Lazy import so the package is truly optional
         response = ollama.chat(
             model=model,
             messages=[
@@ -130,6 +130,9 @@ def dream_waveforms(mission: str, model: str = "llama3.2", timeout: int = 45) ->
         )
         text = response["message"]["content"]
         return _parse_ollama_output(text)
+    except ImportError:
+        print("[rolleRcoasteR] 'ollama' package not installed. Using curated radical concepts.")
+        return get_fallback_concepts(mission, k=4)
     except Exception as e:
         print(f"[rolleRcoasteR] Ollama unavailable or failed ({e}). Using curated radical concepts.")
         return get_fallback_concepts(mission, k=4)
